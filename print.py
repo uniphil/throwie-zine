@@ -223,7 +223,7 @@ Find more stuff and our next
 events at OnesAndZeros.ca
 <3
 """, s, 3)
-        print_break(s, 4)
+        print_break(s, 2)
 
         break
 
