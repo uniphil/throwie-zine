@@ -20,8 +20,8 @@ def print_im(f, ser, rotate=True):
         im = im.rotate(-90, expand=True)
 
     dots = 20
-    heatTime = 150
-    heatInterval = 110
+    heatTime = 127
+    heatInterval = 100
     ser.write([
         27,
         55,
@@ -203,7 +203,7 @@ LED, making it safe for them to
 work with higher voltages.
 
 A common resistor size used with
-LEDs is 330 Ohms.Most LEDs can
+LEDs is 330 Ohms. Most LEDs can
 be used with up to 9 Volts if a
 330 Ohm resistor is connected in
 series with the LED like this:
@@ -221,6 +221,7 @@ creativity!
 
 Find more stuff and our next
 events at OnesAndZeros.ca
+@onesandzerosca
 <3
 """, s, 3)
         print_break(s, 2)
