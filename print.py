@@ -14,8 +14,10 @@ ROW = (
     48,  # width
 )
 
-def print_im(f, ser):
-    im = Image.open(f).rotate(-90, expand=True)
+def print_im(f, ser, rotate=True):
+    im = Image.open(f)
+    if rotate:
+        im = im.rotate(-90, expand=True)
 
     dots = 20
     heatTime = 150
@@ -114,24 +116,37 @@ gains in modern LED tech, many
 new household light bulbs are
 even LEDs.
 
-LEDs are "semiconductors", which
-means that it's a little hard to
-explain how they work because
-there is so much -magic- i mean
-*physics* going on. They're too
-small to see what's going on if
-you try to take them apart, and
-tricky to DIY.
+Diodes conduct electricity only
+in one direction - they almost
+completely block it if they are
+connected backwards (this is why
+they are called semiconductors).
+That's why nothing happens if
+you connect an LED the wrong way
+around.
 
-[todo: not be such a downer!
-still read about them!]
+When current flows (forwards)
+through an LED, it lights up!
+The frequency of the light,
+which we perceive as colour, is
+determined by the chemistry
+of the semiconductor materials.
+
+White LEDs are usually really
+blue LEDs with phosphors added
+that absorb and re-emit some of
+the blue light as yellow light!
 
 Materials:
 
-- Epoxy case / lens
-- Wire leads
-- Semiconductor chemistry
-- Not recyclable?
+- Epoxy case / lens.
+- Wire leads.
+- Tiny amounts of Silicon,
+  Gallium, Arsenic, Nitrogen, or
+  other chemicals depending on
+  the colour.
+- Recyclable: not sure, but
+  probably not :(
 """, s)
 
         title('Coin-cell batteries', s)
@@ -139,55 +154,75 @@ Materials:
 The battery in this kit is a
 type CR2032 lithium battery. The
 2032 part is actually two
-numbers, 20, and 32, referring
+numbers, 20 and 32, which refer
 to the diameter and thickness of
-the packaging: 20mm wide, and
-3.2mm thick. You can swap it out
-for most other batteries that
-look similar. Smaller sizes
-typically don't hold as much
-charge, so your throwie won't
-last as long.
+the battery: 20mm wide, 3.2mm
+thick. You can swap it out for
+most other CRXXXX batteries!
+Smaller sizes typically don't
+store as much energy, so your
+throwie won't last as long.
 
 These batteries are rated "3V"
 or 3 Volts, which is perfect for
 our LEDs! Small blue, green,
 pink, white, and UV LEDs
 typically have a "forward
-voltage" of 3.2 to 3.6 Volts,
-and you don't want to give them
-more than their forward voltage
-rating! More on this in the next
-section.
+voltage" of around 3 Volts,
+which is what they need to start
+conducting electricity and
+lighting up.
 
 Materials:
 
-- Lithium
-- Metal casing
-- Other chemical stuff...
-- Recyclable as e-waste?
+- Aluminum, and likely copper as
+  well as cobalt or nickel.
+- An electrolyte containing
+  Lithium.
+- May be partially recycled if
+  returned as e-waste. As of
+  2017, extracting Lithium from
+  batteries cost 5x more than
+  mining it.
 """, s)
 
         title('An odd circuit', s)
         text("""\
-Usually you need to use a
-resistor!
-
-blah blah
+We only used two components in
+our throwie, but almost every
+other circuit you make with an
+LED will have at least one more:
+a resistor!
 """, s)
-
-        print_break(s, 2)
-        title('Ones and Zeros', s, 1)
+        print_im('resistor.png', s, False)
         text("""\
+
+Resistors limit the amount of
+current that can flow into an
+LED, making it safe for them to
+work with higher voltages.
+
+A common resistor size used with
+LEDs is 330 Ohms.Most LEDs can
+be used with up to 9 Volts if a
+330 Ohm resistor is connected in
+series with the LED like this:
+
+""", s)
+        print_im('resistor-circuit.png', s, False)
+
+        print_break(s, 3)
+        title('Ones and Zeros', s, 1)
+        title("""\
 Artist-run workshops on
 computers and electronics,
 taught gently, with a focus on
 creativity!
 
 Find more stuff and our next
-workshop at OnesAndZeros.ca
+events at OnesAndZeros.ca
 <3
-""", s)
+""", s, 3)
         print_break(s, 4)
 
         break
