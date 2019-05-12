@@ -19,7 +19,7 @@ def print_im(f, ser, rotate=True, black=1):
     if rotate:
         im = im.rotate(-90, expand=True)
 
-    dots = 20
+    dots = 18
     heatTime = 127
     heatInterval = 100
     ser.write([
@@ -49,15 +49,22 @@ def print_im(f, ser, rotate=True, black=1):
                 b |= blk
             out.append(b)
         ser.write(out)
-        sleep(0.05)
+        sleep(0.06)
 
 
 def print_break(ser, n=2):
     ser.write('\n' * n);
 
+CHUNK_SIZE = 300
 def text(t, s):
-    s.write(t)
-    sleep(0.005 * len(t))
+    whole_chunks = len(t) // CHUNK_SIZE  # max 800 characters at a time
+    for i in range(whole_chunks):
+        s.write(t[i * CHUNK_SIZE:(i+1) * CHUNK_SIZE])
+        sleep(0.008 * CHUNK_SIZE)
+    remainders = len(t) % CHUNK_SIZE
+    if remainders > 0:
+        s.write(t[whole_chunks * CHUNK_SIZE:])
+    sleep(0.005 * remainders)
 
 def title(t, s, n=2):
     print_break(s, 1)
@@ -103,6 +110,7 @@ to impress your friends and city
 officials.
         -- Graffiti Research Lab
 """, s)
+        print_break(s, 1)
         print_im('throwies-smol.png', s, False, black=0)
         text("""\
    "Make Throwies Not Bombs"
@@ -250,7 +258,7 @@ events at OnesAndZeros.ca
 """, s, 3)
         print_break(s, 2)
 
-        break
+        # break
         sleep(3)
 
     sleep(0.5)
